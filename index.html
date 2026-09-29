@@ -215,9 +215,9 @@
         <section class="work" id="proyectos" data-method="GET" data-path="/proyectos">
             <div class="work__track">
                 <div class="work__intro">
-                    <p class="eyebrow mono">GET /proyectos · 5 resultados</p>
+                    <p class="eyebrow mono">GET /proyectos · 7 resultados</p>
                     <h2 class="work__title">Proyec<br>tos</h2>
-                    <p class="work__note">Software en producción que usan cientos de miles de personas en Guatemala. Desliza para verlo.</p>
+                    <p class="work__note">Apps, módulos y sistemas en producción en la Contraloría General de Cuentas, con sus boletines oficiales. Desliza para verlos.</p>
                 </div>
 
                 <article class="card" data-cursor="Abrir">
@@ -225,7 +225,7 @@
                     <div class="card__body">
                         <p class="card__idx mono">{ "nativa": ["iOS · Swift", "Android · Kotlin"] }</p>
                         <h3 class="card__name">Contraloría GT</h3>
-                        <p class="card__desc">App oficial de la Contraloría General de Cuentas: registro, actualización de datos y verificación facial para servidores públicos. Nativa en iOS (Swift) y Android (Kotlin), con más de 500 mil descargas solo en Android.</p>
+                        <p class="card__desc">App oficial de la Contraloría General de Cuentas para servidores públicos: registro, actualización de datos y verificación facial. Nativa en iOS (Swift) y Android (Kotlin), con más de 500 mil descargas solo en Android.</p>
                         <p class="card__links"><a class="card__link mono" href="https://apps.apple.com/gt/app/contralor%C3%ADa-gt/id6451423010" target="_blank" rel="noopener">App Store ↗</a><a class="card__link mono" href="https://play.google.com/store/apps/details?id=gob.cgc.portalcgc" target="_blank" rel="noopener">Google Play ↗</a></p>
                     </div>
                 </article>
@@ -241,36 +241,56 @@
                 </article>
 
                 <article class="card" data-cursor="Abrir">
-                    <div class="card__visual card__visual--term " aria-hidden="true"><div class="term"><p class="term__bar"><i></i><i></i><i></i><b>sirefa</b></p><p class="term__body mono"><span>&gt; POST /biometria/verificar</span><span>&lt; RENAP · 200 OK</span><span>&gt; registro firmado</span></p></div></div>
+                    <div class="card__visual card__visual--term " aria-hidden="true"><div class="term"><p class="term__bar"><i></i><i></i><i></i><b>primer-registro</b></p><p class="term__body mono"><span>&gt; POST /registro/primero</span><span>&gt; verificación facial SIREFA</span><span>&lt; 200 · registro creado</span></p></div></div>
                     <div class="card__body">
-                        <p class="card__idx mono">{ "tipo": "integración", "con": "RENAP" }</p>
-                        <h3 class="card__name">SIREFA</h3>
-                        <p class="card__desc">Módulo biométrico integrado con RENAP para servidores públicos. Java, Spring Boot y Angular.</p>
-                        <a class="card__link mono" href="https://www.contraloria.gob.gt/wp-content/uploads/2025/02/BOLETIN-5-2025-CGC-SOLVENTA-DUDAS-A-SERVIDORES-PUBLICOS-SOBRE-EL-USO-DE-APLICACION-SIREFA.pdf" target="_blank" rel="noopener">Leer boletín oficial ↗</a>
+                        <p class="card__idx mono">{ "módulo": "móvil", "app": "Contraloría GT" }</p>
+                        <h3 class="card__name">Primer registro con SIREFA</h3>
+                        <p class="card__desc">Módulo móvil para que cada servidor público haga su primer registro de datos desde el celular, validando su identidad con reconocimiento facial (SIREFA).</p>
+                        <p class="card__links"><a class="card__link mono" href="https://contraloria.gob.gt/wp-content/uploads/2024/06/BOLETIN-37-2024-CGC-HABILITA-LA-APLICACION-MOVIL-CONTRALORIA-GT-PARA-EL-PRIMER-REGISTRO-DE-DATOS.pdf" target="_blank" rel="noopener">Boletín: primer registro ↗</a><a class="card__link mono" href="https://contraloria.gob.gt/wp-content/uploads/2025/01/BOLETIN-95-2024-%E2%80%93-CGC-LANZA-SISTEMA-DE-RECONOCIMIENTO-FACIAL-%E2%80%93-SIREFA.pdf" target="_blank" rel="noopener">Boletín: lanzamiento SIREFA ↗</a><a class="card__link mono" href="https://contraloria.gob.gt/wp-content/uploads/2024/08/BOLETIN-50-2024-PASOS-A-SEGUIR-PARA-LA-VERIFICACION-FACIAN-EN-LA-APP-CGC-GT.pdf" target="_blank" rel="noopener">Boletín: verificación facial ↗</a></p>
                     </div>
                 </article>
 
                 <article class="card" data-cursor="Abrir">
-                    <div class="card__visual card__visual--term term--green" aria-hidden="true"><div class="term"><p class="term__bar"><i></i><i></i><i></i><b>pagos</b></p><p class="term__body mono"><span>&gt; POST /pagos/cobro</span><span>&lt; NeoNet · aprobado</span><span>&lt; VisaNet · aprobado</span></p></div></div>
+                    <div class="card__visual card__visual--term term--green" aria-hidden="true"><div class="term"><p class="term__bar"><i></i><i></i><i></i><b>actualizacion-datos</b></p><p class="term__body mono"><span>&gt; PUT /servidores/datos</span><span>&gt; enero 2025</span><span>&lt; 465,000 actualizaciones</span></p></div></div>
                     <div class="card__body">
-                        <p class="card__idx mono">{ "tipo": "integración", "con": "NeoNet · VisaNet" }</p>
+                        <p class="card__idx mono">{ "módulo": "móvil", "app": "Contraloría GT" }</p>
+                        <h3 class="card__name">Actualización de datos</h3>
+                        <p class="card__desc">Módulo móvil para la actualización anual de datos de los servidores públicos. Solo en enero de 2025 registró 465 mil actualizaciones.</p>
+                        <p class="card__links"><a class="card__link mono" href="https://contraloria.gob.gt/wp-content/uploads/2025/02/BOLETIN-6-2025-CGC-REPORTA-EL-REGISTRO-DE-465-MIL-ACTUALIZACIONES-DE-DATOS.pdf" target="_blank" rel="noopener">Boletín: 465 mil actualizaciones ↗</a><a class="card__link mono" href="https://www.contraloria.gob.gt/wp-content/uploads/2025/02/BOLETIN-5-2025-CGC-SOLVENTA-DUDAS-A-SERVIDORES-PUBLICOS-SOBRE-EL-USO-DE-APLICACION-SIREFA.pdf" target="_blank" rel="noopener">Boletín: dudas sobre SIREFA ↗</a></p>
+                    </div>
+                </article>
+
+                <article class="card" data-cursor="Abrir">
+                    <div class="card__visual card__visual--term term--paper" aria-hidden="true"><div class="term"><p class="term__bar"><i></i><i></i><i></i><b>bitacora-electronica</b></p><p class="term__body mono"><span>&gt; GET /obras/bitacora</span><span>&gt; avance físico registrado</span><span>&lt; 200 · bitácora al día</span></p></div></div>
+                    <div class="card__body">
+                        <p class="card__idx mono">{ "módulo": "móvil", "app": "Contraloría GT" }</p>
+                        <h3 class="card__name">Bitácora electrónica móvil</h3>
+                        <p class="card__desc">Módulo móvil de la bitácora electrónica de obra pública: registro y seguimiento de avances físicos y técnicos de los proyectos, desde el celular.</p>
+                        <p class="card__links"><a class="card__link mono" href="https://contraloria.gob.gt/wp-content/uploads/2024/08/BOLETIN-57-2024-CGC-CONTRIBUYE-CON-LA-TRANSPARENCIA-EN-LA-OBRA-PUBLICA-A-TRAVES-DEL-MODULO-DE-BE.pdf" target="_blank" rel="noopener">Boletín: transparencia en obra pública ↗</a><a class="card__link mono" href="https://www.contraloria.gob.gt/wp-content/uploads/2023/07/BOLETIN-46-CGC-HABILITA-MODULO-DE-BITACORAS-ELECTRONICAS.pdf" target="_blank" rel="noopener">Boletín: módulo de bitácoras ↗</a></p>
+                    </div>
+                </article>
+
+                <article class="card" data-cursor="Abrir">
+                    <div class="card__visual card__visual--term " aria-hidden="true"><div class="term"><p class="term__bar"><i></i><i></i><i></i><b>pagos</b></p><p class="term__body mono"><span>&gt; POST /pagos/gestion</span><span>&lt; NeoNet · aprobado</span><span>&lt; VisaNet · aprobado</span></p></div></div>
+                    <div class="card__body">
+                        <p class="card__idx mono">{ "tipo": "integración", "con": ["NeoNet", "VisaNet"] }</p>
                         <h3 class="card__name">Pagos en línea</h3>
-                        <p class="card__desc">Integración de cobros con tarjeta mediante NeoNet y VisaNet dentro de los sistemas institucionales.</p>
-                        <span class="card__link card__link--off mono">Proyecto interno</span>
+                        <p class="card__desc">Pago de gestiones de la Contraloría con tarjeta, integrado con NeoNet y VisaNet.</p>
+                        <p class="card__links"><a class="card__link mono" href="https://www.contraloria.gob.gt/index.php/pago-de-gestiones/" target="_blank" rel="noopener">Página oficial de pagos ↗</a></p>
                     </div>
                 </article>
 
                 <article class="card" data-cursor="Abrir">
-                    <div class="card__visual card__visual--term term--paper" aria-hidden="true"><div class="term"><p class="term__bar"><i></i><i></i><i></i><b>finiquitos</b></p><p class="term__body mono"><span>&gt; sistema legado · 20+ años</span><span>&gt; nuevos módulos desplegados</span><span>&lt; downtime: 0 min</span></p></div></div>
+                    <div class="card__visual card__visual--term term--green" aria-hidden="true"><div class="term"><p class="term__bar"><i></i><i></i><i></i><b>sistemas-internos</b></p><p class="term__body mono"><span>&gt; finiquitos · 20+ años en uso</span><span>&gt; nuevos módulos desplegados</span><span>&lt; downtime: 0 min</span></p></div></div>
                     <div class="card__body">
-                        <p class="card__idx mono">{ "tipo": "sistema interno" }</p>
-                        <h3 class="card__name">Sistema de Finiquitos</h3>
-                        <p class="card__desc">Extendí un sistema crítico con más de 20 años en uso, sin interrumpir el servicio ni un minuto.</p>
-                        <span class="card__link card__link--off mono">Proyecto interno</span>
+                        <p class="card__idx mono">{ "tipo": "sistemas internos" }</p>
+                        <h3 class="card__name">Sistemas internos</h3>
+                        <p class="card__desc">Sistemas que usa la institución por dentro, como el de finiquitos: lo extendí sin interrumpir el servicio de un sistema crítico con más de 20 años en uso.</p>
+                        <span class="card__link card__link--off mono">Uso interno, sin enlace público</span>
                     </div>
                 </article>
 
-                <a class="work__more" data-cursor="GitHub" href="https://github.com/CristopherGS" target="_blank" rel="noopener">
+                <a class="work__more" data-cursor="GitHub" data-track="clic_github" href="https://github.com/CristopherGS" target="_blank" rel="noopener">
                     <span class="mono">GET /github</span>
                     <span class="work__more-big">Más en GitHub&nbsp;→</span>
                 </a>
@@ -293,7 +313,7 @@
                     <li class="step">
                         <span class="step__when mono">2022 – hoy</span>
                         <h3>Desarrollador fullstack · Contraloría General de Cuentas</h3>
-                        <p>Apps en Angular y Java EE / Spring Boot para más de 500 mil ciudadanos, 2 apps publicadas en iOS y Android, módulo biométrico SIREFA con RENAP, pagos con NeoNet y VisaNet, reportes en Power BI. Equipo Scrum de 5 personas.</p>
+                        <p>Apps nativas Contraloría GT y Colaborador CGC (Swift y Kotlin) y sus módulos móviles: primer registro con reconocimiento facial SIREFA, actualización de datos y bitácora electrónica. Pagos en línea con NeoNet y VisaNet, sistemas internos en Angular y Java EE / Spring Boot para más de 500 mil usuarios, reportes en Power BI. Equipo Scrum de 5 personas.</p>
                     </li>
                     <li class="step">
                         <span class="step__when mono">Freelance</span>

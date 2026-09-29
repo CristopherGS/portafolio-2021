@@ -345,13 +345,13 @@ ol, ul { list-style: none; }
 .card__link { justify-self: start; margin-top: 6px; color: #8C97FF; text-decoration: none; border-bottom: 1px solid currentColor; }
 .card__link:hover { color: #fff; }
 .card__link--off { color: rgba(241, 242, 244, .45); border: 0; }
-.card__body { display: grid; grid-template-columns: auto 1fr; gap: 6px 32px; align-items: baseline; }
+.card__body { display: grid; grid-template-columns: 1fr; gap: 8px; }
 .card__idx { grid-column: 1 / -1; color: #8C97FF; }
 .card__name {
     font-family: var(--display); font-weight: 800; font-stretch: 125%;
     font-size: clamp(1.6rem, 3vw, 2.8rem); line-height: 1; letter-spacing: -0.02em; white-space: nowrap;
 }
-.card__desc { max-width: 52ch; opacity: .75; font-size: .95rem; }
+.card__desc { max-width: 64ch; opacity: .75; font-size: .95rem; }
 
 .work__more {
     flex: none; width: min(40vw, 520px); height: min(72svh, 640px);
