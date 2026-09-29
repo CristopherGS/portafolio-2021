@@ -43,7 +43,7 @@ function init() {
 
     if (reduced) {
         document.documentElement.classList.add('is-reduced');
-        routeIndicator(); staticState(); contactForm(); return;
+        routeIndicator(); staticState(); contactForm(); themeToggle(); return;
     }
 
     loader().then(() => intro(packets));
@@ -60,6 +60,7 @@ function init() {
     magnetic();
     hideBarOnScroll();
     contactForm();
+    themeToggle();
     routeIndicator(); // al final: así sus posiciones ya cuentan los pins
 
     ScrollTrigger.refresh();
@@ -448,6 +449,51 @@ function contactForm() {
         error.classList.add('is-ok');
         error.textContent = '¡Gracias! Recibí tu mensaje y te respondo pronto a tu correo.';
         form.querySelectorAll('input, select, textarea').forEach(el => { el.disabled = true; });
+    });
+}
+
+/* ---------- tema claro / oscuro ---------- */
+function themeToggle() {
+    const btn = document.querySelector('.theme');
+    const root = document.documentElement;
+    const meta = document.querySelector('meta[name="theme-color"]');
+    const label = () => btn.setAttribute('aria-label', root.dataset.theme === 'dark' ? 'Cambiar a modo claro' : 'Cambiar a modo oscuro');
+    label();
+
+    function apply(t) {
+        root.dataset.theme = t;
+        meta.content = t === 'dark' ? '#0A0C11' : '#DCDFE4';
+        label();
+        document.dispatchEvent(new Event('themechange'));
+    }
+
+    btn.addEventListener('click', () => {
+        const next = root.dataset.theme === 'dark' ? 'light' : 'dark';
+        try { localStorage.setItem('tema', next); } catch (e) { }
+
+        if (reduced || !document.startViewTransition) { apply(next); return; }
+
+        // el nuevo tema se revela en un círculo que nace del botón
+        const b = btn.getBoundingClientRect();
+        const x = b.left + b.width / 2, y = b.top + b.height / 2;
+        const r = Math.hypot(Math.max(x, innerWidth - x), Math.max(y, innerHeight - y));
+        const vt = document.startViewTransition(() => apply(next));
+        vt.ready.then(() => {
+            document.documentElement.animate(
+                { clipPath: [`circle(0px at ${x}px ${y}px)`, `circle(${r}px at ${x}px ${y}px)`] },
+                { duration: 700, easing: 'cubic-bezier(.7, 0, .2, 1)', pseudoElement: '::view-transition-new(root)' }
+            );
+        }).catch(() => { });
+        vt.finished.catch(() => { });
+        vt.updateCallbackDone.catch(() => { });
+        gsap.fromTo(btn.querySelectorAll('svg'), { rotate: -90, scale: .4 }, { rotate: 0, scale: 1, duration: .6, ease: 'back.out(2)' });
+    });
+
+    // si la persona no eligió, seguimos al sistema en vivo
+    matchMedia('(prefers-color-scheme: dark)').addEventListener('change', e => {
+        let saved = null;
+        try { saved = localStorage.getItem('tema'); } catch (err) { }
+        if (!saved) apply(e.matches ? 'dark' : 'light');
     });
 }
 

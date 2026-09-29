@@ -7,6 +7,14 @@
 window.Packets = (function () {
     const GLYPHS = '01{}[]<>/;=*$#SELECTFROMWHEREJOIN'.split('');
     const COLORS = { ink: '#0B0D12', cobalt: '#2437FF' };
+    // el color de los caracteres sigue al tema (claro/oscuro)
+    function readColors() {
+        const dark = document.documentElement.dataset.theme === 'dark';
+        COLORS.ink = dark ? '#E7E9EE' : '#0B0D12';
+        COLORS.cobalt = dark ? '#8C97FF' : '#2437FF';
+        COLORS.dark = dark;
+    }
+    readColors();
 
     function create(canvas, opts) {
         const ctx = canvas.getContext('2d');
@@ -87,7 +95,7 @@ window.Packets = (function () {
             const a = state.assemble, s = state.scatter;
 
             const ga = 0.06 * Math.max(0, (a - 0.6) / 0.4) * (1 - s);
-            if (ghost && ga > 0) {
+            if (ghost && ga > 0 && !COLORS.dark) {
                 ctx.globalAlpha = ga;
                 ctx.drawImage(ghost, 0, 0, w, h);
             }
@@ -143,6 +151,8 @@ window.Packets = (function () {
             clearTimeout(rt);
             rt = setTimeout(() => { if (canvas.clientWidth !== w) { build(); if (!running) frame(); } }, 150);
         });
+
+        document.addEventListener('themechange', () => { readColors(); if (!running) frame(); });
 
         if (opts && opts.static) state.assemble = 1;
         build();
