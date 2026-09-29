@@ -15,6 +15,9 @@ export function track(nombre, params = {}) {
     if (analytics) logEventFn(analytics, nombre, params);
 }
 
+// para scripts no-módulo (formulario en main.js)
+window.trackEvent = track;
+
 // cualquier enlace con data-track registra un evento al hacer clic
 document.addEventListener("click", (e) => {
     const el = e.target.closest("[data-track]");

@@ -4,8 +4,10 @@
 
 gsap.registerPlugin(ScrollTrigger, SplitText, ScrambleTextPlugin);
 
-/* URL del webhook que recibe el formulario. Vacía = sin conectar todavía. */
-const CONTACT_WEBHOOK = '';
+/* Servicio que recibe el formulario y lo manda a mi correo (Web3Forms).
+   La clave es pública por diseño: solo permite enviarme mensajes a mí. */
+const CONTACT_WEBHOOK = 'https://api.web3forms.com/submit';
+const WEB3FORMS_KEY = '0eeb84c5-47ed-4d01-bcf2-6c0acf0c527b';
 
 const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 const finePointer = window.matchMedia('(pointer: fine)').matches;
@@ -388,6 +390,7 @@ function contactForm() {
     form.addEventListener('submit', async e => {
         e.preventDefault();
         error.textContent = '';
+        error.classList.remove('is-ok');
         if (!validate()) { error.textContent = 'Revisa los campos marcados en naranja.'; return; }
         const data = Object.fromEntries(new FormData(form));
         if (data.empresa) return; // bot
@@ -395,20 +398,25 @@ function contactForm() {
         data.origen = location.href;
         data.enviado = new Date().toISOString();
 
-        // sin webhook y fuera de local: no fingimos el envío, abrimos el correo
-        if (!CONTACT_WEBHOOK && !isLocal) {
-            const body = `${data.mensaje}\n\nTipo: ${data.tipo}\nPresupuesto: ${data.presupuesto || 'sin definir'}\n${data.nombre} · ${data.correo}`;
-            location.href = `mailto:guerracristofer@gmail.com?subject=${encodeURIComponent('Proyecto: ' + data.tipo)}&body=${encodeURIComponent(body)}`;
-            return;
-        }
 
         send.disabled = true;
         send.textContent = 'Enviando…';
         steps.forEach((_, i) => setStep(i));
 
         const request = CONTACT_WEBHOOK
-            ? fetch(CONTACT_WEBHOOK, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(data) })
-                .then(r => { if (!r.ok) throw new Error(r.status); return r; })
+            ? fetch(CONTACT_WEBHOOK, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+                body: JSON.stringify({
+                    access_key: WEB3FORMS_KEY,
+                    subject: `Nuevo mensaje desde guerracristofer.web.app · ${data.tipo}`,
+                    from_name: 'Portafolio Cristopher Guerra',
+                    replyto: data.correo,
+                    botcheck: '',
+                    ...data
+                })
+            })
+                .then(r => r.json().then(j => { if (!r.ok || !j.success) throw new Error(j.message || r.status); return j; }))
             : wait(2600); // modo demo, solo en localhost
 
         let failed = false;
@@ -434,8 +442,11 @@ function contactForm() {
         }
 
         setStep(steps.length - 1, 'is-done');
+        window.trackEvent?.('envio_formulario', { tipo: data.tipo });
         if (!CONTACT_WEBHOOK) steps[steps.length - 1].insertAdjacentText('beforeend', ' (demo local)');
         send.textContent = 'Mensaje enviado';
+        error.classList.add('is-ok');
+        error.textContent = '¡Gracias! Recibí tu mensaje y te respondo pronto a tu correo.';
         form.querySelectorAll('input, select, textarea').forEach(el => { el.disabled = true; });
     });
 }
