@@ -12,6 +12,14 @@
     <!-- custom css file link  -->
     <link rel="stylesheet" href="css/style.css">
 
+    <!-- oculta la portada hasta que GSAP arranque (solo si no se pidió reducir el movimiento) -->
+    <script>
+        if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+            document.documentElement.classList.add('js-intro');
+            setTimeout(function () { document.documentElement.classList.remove('js-intro'); }, 4000);
+        }
+    </script>
+
 </head>
 
 <body>
@@ -40,7 +48,10 @@
     <section class="home" id="home">
 
         <div class="image">
-            <img src="images/main-img.jpg" alt="">
+            <span class="photo">
+                <img src="images/main-img.jpg" alt="Foto de Cristopher Guerra">
+                <span class="photo-curtain" aria-hidden="true"></span>
+            </span>
         </div>
 
         <div class="content">
@@ -293,8 +304,13 @@
     <!-- jquery cdn link  -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 
+    <!-- gsap cdn links  -->
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/gsap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/SplitText.min.js"></script>
+
     <!-- custom js file link  -->
     <script src="js/script.js"></script>
+    <script src="js/hero.js"></script>
 </body>
 
 </html>
