@@ -400,6 +400,15 @@ section{
     cursor: pointer;
 }
 
+.portfolio .button-container .btn.active:before{
+    top:100%;
+    transform: translate(-50%, 100%);
+}
+
+.portfolio .button-container .btn.active{
+    color:var(--primary-text-color);
+}
+
 .portfolio .image-container{
     display: flex;
     align-items: center;
@@ -424,6 +433,7 @@ section{
     height: 100%;
     width: 100%;
     object-fit: cover;
+    transform: scale(1.08);
 }
 
 .portfolio .image-container .box .info{
