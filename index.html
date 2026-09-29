@@ -1,317 +1,215 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cristopher Guerra</title>
+    <title>Cristopher Guerra · Desarrollador backend</title>
+    <meta name="description" content="Portafolio de Cristopher Guerra, desarrollador backend en Guatemala. APIs, bases de datos y la lógica que las une.">
+    <meta name="theme-color" content="#DCDFE4">
 
-    <!-- font awesome cdn link  -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
-
-    <!-- custom css file link  -->
-    <link rel="stylesheet" href="css/style.css">
-
-    <!-- oculta la portada hasta que GSAP arranque (solo si no se pidió reducir el movimiento) -->
-    <script>
-        if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-            document.documentElement.classList.add('js-intro');
-            setTimeout(function () { document.documentElement.classList.remove('js-intro'); }, 4000);
-        }
-    </script>
-
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,100..900&family=Instrument+Sans:wght@400..700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lenis@1.3.4/dist/lenis.css">
+    <link rel="stylesheet" href="css/main.css">
 </head>
 
 <body>
 
-    <!-- header section starts  -->
+    <a class="skip" href="#main">Saltar al contenido</a>
 
-    <header>
-
-        <div id="menu" class="fas fa-bars"></div>
-
-        <nav class="navbar">
-            <a href="#home">home</a>
-            <a href="#about">about</a>
-            <a href="#portfolio">portfolio</a>
-            <a href="#contact">contact</a>
+    <!-- barra superior: muestra la "ruta" de la sección visible -->
+    <header class="bar">
+        <a class="bar__logo" href="#inicio" aria-label="Ir al inicio">CG</a>
+        <p class="bar__route" aria-hidden="true">
+            <span class="bar__method">GET</span>
+            <span class="bar__path">/</span>
+            <span class="bar__status">200</span>
+        </p>
+        <nav class="bar__nav" aria-label="Secciones">
+            <a href="#sobre-mi">Sobre mí</a>
+            <a href="#stack">Stack</a>
+            <a href="#proyectos">Proyectos</a>
+            <a href="#contacto" class="bar__cta">Contacto</a>
         </nav>
-
-        <div id="theme-toggler" class="fas fa-moon"></div>
-
     </header>
 
-    <!-- header section ends -->
+    <main id="main">
 
-    <!-- home section starts  -->
+        <!-- 1 · PORTADA -->
+        <section class="hero" id="inicio" data-method="GET" data-path="/">
+            <canvas class="hero__canvas" aria-hidden="true"></canvas>
+            <h1 class="sr-only">Cristopher Guerra, desarrollador backend</h1>
 
-    <section class="home" id="home">
+            <div class="hero__meta">
+                <p class="mono hero__req"><span>GET</span> /cristopher-guerra HTTP/1.1</p>
+                <p class="mono hero__res"><span class="dot"></span>200 OK · Guatemala</p>
+            </div>
 
-        <div class="image">
-            <span class="photo">
-                <img src="images/main-img.jpg" alt="Foto de Cristopher Guerra">
-                <span class="photo-curtain" aria-hidden="true"></span>
-            </span>
-        </div>
-
-        <div class="content">
-            <span class="hello">Hola</span>
-            <h3> Soy <span>Cristopher Guerra</span> </h3>
-            <p> Soy un desarrolador backend y entusiasta del aprendizaje,
-                me gusta aprender nuevas tecnologias y aprender de los demas.
-            </p>
-            <a href="#about" class="btn">about me</a>
-        </div>
-
-    </section>
-
-    <!-- home section ends -->
-
-    <section class="about" id="about">
-
-        <h1 class="heading"> Sobre <span>mí</span> </h1>
-
-        <div class="row">
-
-            <div class="box">
-                <h3 class="title">Lenguajes de programación </h3>
-                <div class="progress">
-                    <h3> HTML <span>65%</span> </h3>
-                    <div class="bar"><span></span></div>
-                </div>
-                <div class="progress">
-                    <h3> CSS <span>45%</span> </h3>
-                    <div class="bar"><span></span></div>
-                </div>
-                <div class="progress">
-                    <h3> JavaScript <span>65%</span> </h3>
-                    <div class="bar"><span></span></div>
-                </div>
-                <div class="progress">
-                    <h3> NodeJS <span>35%</span> </h3>
-                    <div class="bar"><span></span></div>
-                </div>
-                <div class="progress">
-                    <h3> Java <span>55%</span> </h3>
-                    <div class="bar"><span></span></div>
+            <div class="hero__foot">
+                <p class="hero__lead">Desarrollador backend. Construyo lo que no se ve: APIs, bases de datos y la lógica que las une.</p>
+                <div class="hero__actions">
+                    <a class="btn btn--solid magnetic" href="#proyectos">Ver proyectos</a>
+                    <a class="btn magnetic" href="cv/CV.pdf" download>Descargar CV</a>
                 </div>
             </div>
 
-            <div class="box">
-                <h3 class="title">Base de Datos</h3>
-                <div class="progress">
-                    <h3> MySQL <span>94%</span> </h3>
-                    <div class="bar"><span></span></div>
+            <p class="hero__hint mono" aria-hidden="true">mueve el cursor · baja</p>
+        </section>
+
+        <!-- 2 · SOBRE MÍ -->
+        <section class="about" id="sobre-mi" data-method="GET" data-path="/sobre-mi">
+            <div class="about__inner">
+                <p class="eyebrow mono">GET /sobre-mi</p>
+                <p class="about__text">
+                    Hola, soy Cristopher. Estudio Ingeniería en Informática y Sistemas en la Universidad Rafael Landívar
+                    y me gusta el lado del software que casi nadie mira: dónde viven los datos, cómo viajan y por qué
+                    responden rápido. Aprendo tecnologías nuevas todo el tiempo, y sobre todo aprendo de los demás.
+                </p>
+                <figure class="about__photo">
+                    <img src="images/cristopher.jpg" alt="Foto de Cristopher Guerra" width="664" height="880" loading="lazy">
+                    <figcaption class="mono">cristopher.jpg · 664×880</figcaption>
+                </figure>
+            </div>
+        </section>
+
+        <!-- 3 · STACK como resultado de una consulta -->
+        <section class="stack" id="stack" data-method="SELECT" data-path="* FROM stack">
+            <div class="stack__inner">
+                <p class="eyebrow mono">mysql&gt;</p>
+                <h2 class="stack__query mono" aria-label="Consulta: seleccionar tecnología y nivel desde stack, ordenado por nivel">
+                    <span class="stack__typed">SELECT tecnologia, nivel FROM stack ORDER BY nivel DESC;</span><span class="caret"></span>
+                </h2>
+
+                <div class="table" role="table" aria-label="Tecnologías y nivel de dominio">
+                    <div class="table__head mono" role="row">
+                        <span role="columnheader">tecnologia</span>
+                        <span role="columnheader">tipo</span>
+                        <span role="columnheader">nivel</span>
+                    </div>
+                    <!-- datos del portafolio original -->
+                    <div class="row" role="row" data-level="94"><span role="cell" class="row__name">MySQL</span><span role="cell" class="row__type mono">base de datos</span><span role="cell" class="row__lvl"><i class="row__bar"></i><b class="row__num mono">94</b></span></div>
+                    <div class="row" role="row" data-level="77"><span role="cell" class="row__name">MariaDB</span><span role="cell" class="row__type mono">base de datos</span><span role="cell" class="row__lvl"><i class="row__bar"></i><b class="row__num mono">77</b></span></div>
+                    <div class="row" role="row" data-level="75"><span role="cell" class="row__name">MongoDB</span><span role="cell" class="row__type mono">base de datos</span><span role="cell" class="row__lvl"><i class="row__bar"></i><b class="row__num mono">75</b></span></div>
+                    <div class="row" role="row" data-level="65"><span role="cell" class="row__name">JavaScript</span><span role="cell" class="row__type mono">lenguaje</span><span role="cell" class="row__lvl"><i class="row__bar"></i><b class="row__num mono">65</b></span></div>
+                    <div class="row" role="row" data-level="65"><span role="cell" class="row__name">HTML</span><span role="cell" class="row__type mono">lenguaje</span><span role="cell" class="row__lvl"><i class="row__bar"></i><b class="row__num mono">65</b></span></div>
+                    <div class="row" role="row" data-level="55"><span role="cell" class="row__name">Java</span><span role="cell" class="row__type mono">lenguaje</span><span role="cell" class="row__lvl"><i class="row__bar"></i><b class="row__num mono">55</b></span></div>
+                    <div class="row" role="row" data-level="45"><span role="cell" class="row__name">CSS</span><span role="cell" class="row__type mono">lenguaje</span><span role="cell" class="row__lvl"><i class="row__bar"></i><b class="row__num mono">45</b></span></div>
+                    <div class="row" role="row" data-level="35"><span role="cell" class="row__name">Node.js</span><span role="cell" class="row__type mono">entorno</span><span role="cell" class="row__lvl"><i class="row__bar"></i><b class="row__num mono">35</b></span></div>
                 </div>
-                <div class="progress">
-                    <h3> MariaDB <span>77%</span> </h3>
-                    <div class="bar"><span></span></div>
+
+                <p class="stack__foot mono">8 rows in set (0.04 sec)</p>
+            </div>
+        </section>
+
+        <!-- 4 · PROYECTOS en scroll horizontal -->
+        <section class="work" id="proyectos" data-method="GET" data-path="/proyectos">
+            <div class="work__track">
+                <div class="work__intro">
+                    <p class="eyebrow mono">GET /proyectos · 3 resultados</p>
+                    <h2 class="work__title">Proyec<br>tos</h2>
+                    <p class="work__note">Cosas que construí aprendiendo. Desliza para verlas.</p>
                 </div>
-                <div class="progress">
-                    <h3> MongoDB <span>75%</span> </h3>
-                    <div class="bar"><span></span></div>
+
+                <article class="card">
+                    <div class="card__media"><img src="images/glosarioweb.png" alt="Captura de Glosario web: índice de la A a la Z con tarjetas de términos" loading="lazy"></div>
+                    <div class="card__body">
+                        <p class="card__idx mono">{ "id": 1, "tipo": "web" }</p>
+                        <h3 class="card__name">Glosario web</h3>
+                        <p class="card__desc">Glosario colaborativo: la comunidad publica términos, los busca y los filtra con un índice de la A a la Z. Incluye inicio de sesión, edición y revista descargable.</p>
+                    </div>
+                </article>
+
+                <article class="card">
+                    <div class="card__media"><img src="images/giffAPI.png" alt="Captura de GifExpert: cuadrícula de GIFs de One Punch Man" loading="lazy"></div>
+                    <div class="card__body">
+                        <p class="card__idx mono">{ "id": 2, "tipo": "web" }</p>
+                        <h3 class="card__name">GifExpert</h3>
+                        <p class="card__desc">Buscador de GIFs que consume una API externa y muestra los resultados por categoría en una cuadrícula.</p>
+                    </div>
+                </article>
+
+                <article class="card">
+                    <div class="card__media"><img src="images/desing.png" alt="Captura del reto de diseño: tarjeta de resumen de pedido" loading="lazy"></div>
+                    <div class="card__body">
+                        <p class="card__idx mono">{ "id": 3, "tipo": "diseño" }</p>
+                        <h3 class="card__name">Reto de diseño</h3>
+                        <p class="card__desc">Maquetación fiel de una tarjeta de resumen de pedido a partir de un diseño dado, con HTML y CSS.</p>
+                    </div>
+                </article>
+
+                <a class="work__more" href="https://github.com/CristopherGS" target="_blank" rel="noopener">
+                    <span class="mono">GET /github</span>
+                    <span class="work__more-big">Más en GitHub&nbsp;→</span>
+                </a>
+            </div>
+        </section>
+
+        <!-- 5 · TRAYECTORIA (orden cronológico real) -->
+        <section class="path" id="trayectoria" data-method="GET" data-path="/trayectoria">
+            <div class="path__inner">
+                <p class="eyebrow mono">GET /trayectoria</p>
+                <h2 class="path__title">Trayectoria</h2>
+                <div class="path__body">
+                <span class="path__rail" aria-hidden="true"></span>
+                <ol class="path__list">
+                    <li class="step">
+                        <span class="step__when mono">Hoy</span>
+                        <h3>Universidad Rafael Landívar</h3>
+                        <p>Ingeniería en Informática y Sistemas. Cursé el 4.º año de la carrera.</p>
+                    </li>
+                    <li class="step">
+                        <span class="step__when mono">Diversificado</span>
+                        <h3>Colegio Estudios Avanzados Pino Montano</h3>
+                        <p>Bachiller en Computación con Orientación Científica.</p>
+                    </li>
+                    <li class="step">
+                        <span class="step__when mono">Básico</span>
+                        <h3>Instituto de Educación Básica por Cooperativa</h3>
+                        <p>Diploma de tercer grado básico.</p>
+                    </li>
+                </ol>
+                </div>
+            </div>
+        </section>
+
+        <!-- 6 · CONTACTO -->
+        <section class="contact" id="contacto" data-method="POST" data-path="/contacto">
+            <div class="marquee" aria-hidden="true">
+                <div class="marquee__inner">
+                    <span>Abierto a proyectos backend · Guatemala · APIs · Bases de datos ·&nbsp;</span>
+                    <span>Abierto a proyectos backend · Guatemala · APIs · Bases de datos ·&nbsp;</span>
                 </div>
             </div>
 
-            <!-- <div class="box">
-                <h3 class="title">experience</h3>
-                <div class="exp-box">
-                    <h3>front end development</h3>
-                    <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Mollitia consequatur impedit dolor vel
-                        aperiam assumenda consequuntur quibusdam. Illo, dolorum nihil!</p>
-                </div>
-            </div> -->
+            <div class="contact__inner">
+                <p class="eyebrow mono">POST /contacto</p>
+                <h2 class="contact__title">¿Hablamos?</h2>
+                <a class="contact__mail magnetic" href="mailto:guerracristofer@gmail.com">guerracristofer@gmail.com</a>
 
-            <div class="box">
-                <h3 class="title">Educación</h3>
-                <div class="exp-box">
-                    <h3>Universidad</h3>
-                    <p>Soy estudiante de Ingenieria informatica y sistemas, he cursado el 4to año de la carrera.
-                        En la Universidad Rafael Landivar.</p>
-                </div>
-                <div class="exp-box">
-                    <h3>Diversificado </h3>
-                    <p>Cuento con el Título Bachiller En Computación Con Orientación Científica. 
-                        En el Colegio Estudios Avanzados Pino Montano</p>
-                </div>
-                <div class="exp-box">
-                    <h3>Educación Básica </h3>
-                    <p>Obtuve el Diploma de Tercer Grado Básico.
-                        En el Instituto de Educación Básica por Cooperativa</p>
-                </div>
+                <ul class="contact__list">
+                    <li><span class="mono">whatsapp</span><a href="https://api.whatsapp.com/send/?phone=50246842943&text=Hola%20Cristopher%2C%20vi%20tu%20portafolio" target="_blank" rel="noopener">+502 4684-2943</a></li>
+                    <li><span class="mono">github</span><a href="https://github.com/CristopherGS" target="_blank" rel="noopener">CristopherGS</a></li>
+                    <li><span class="mono">cv</span><a href="cv/CV.pdf" download>Descargar PDF</a></li>
+                </ul>
             </div>
 
-        </div>
+            <footer class="foot mono">
+                <span>© 2026 Cristopher Guerra</span>
+                <span>Hecho con GSAP · Connection: close</span>
+            </footer>
+        </section>
 
-        <div class="download">
-            <a href="./cv/CV.pdf" class="btn" target="_blank"> Descargar mi CV </a>
-        </div>
+    </main>
 
-    </section>
-
-    <!-- service section starts 
-
-    <section class="services" id="services">
-
-        <h1 class="heading"> <span>my</span> services </h1>
-
-        <div class="box-container">
-
-            <div class="box">
-                <span class="number">1</span>
-                <img src="images/s1.png" alt="">
-                <h3>seo marketing</h3>
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Expedita harum consectetur quae eligendi
-                    saepe vitae ut animi in fuga dolorem.</p>
-            </div>
-
-        </div>
-
-    </section> -->
-
-    <!-- service section ends -->
-
-    <!-- portfolio section starts  -->
-
-    <section class="portfolio" id="portfolio">
-
-        <h1 class="heading"> <span>my</span> portfolio </h1>
-
-        <div class="button-container">
-            <div class="btn active" data-filter="all">all</div>
-            <div class="btn" data-filter="design">design</div>
-            <div class="btn" data-filter="code">code</div>
-            <div class="btn" data-filter="website">website</div>
-        </div>
-
-        <div class="image-container">
-
-            <div class="box design">
-                <img src="images/desing.png" alt="" id="github1">
-                <div class="info">
-                    <h3>Reto de diseño</h3>
-                </div>
-            </div>
-
-            <div class="box website">
-                <img src="images/glosarioweb.png" alt="">
-                <div class="info">
-                    <h3>Glosarioweb</h3>
-                </div>
-            </div>
-
-            <div class="box website">
-                <img src="images/giffAPI.png" alt="">
-                <div class="info">
-                    <h3>GiffExpert</h3>
-                </div>
-            </div>
-
-        </div>
-
-    </section>
-
-    <!-- portfolio section ends -->
-
-    <!-- contact section starts  -->
-
-    <section class="contact" id="contact">
-
-        <h1 class="heading"> Contácta<span>me</span> </h1>
-
-        <div class="box-container">
-
-            <div class="box">
-                <i class="fas fa-phone"></i>
-                <h3>Mi Numero</h3>
-                <p>+502 4684-2943</p>
-            </div>
-
-            <div class="box">
-                <i class="fab fa-whatsapp-square"></i>
-                <h3>Directo por Whatssap</h3>
-                <p><a href="https://api.whatsapp.com/send/?phone=50246842943&text=Me+interesa+tu+servicio&app_absent=0" target="_blank">hazme click y mandame un mensaje</a></p>
-            </div>
-            <div class="box">
-                <i class="fas fa-envelope"></i>
-                <h3>Mi Correo</h3>
-                <p><a href="mailto:guerracristofer@gmail.com?Subject=Interesado%20en%20tu%20servicio">guerracristofer@gmail.com</a></p>
-            </div>
-
-            <div class="box">
-                <i class="fab fa-github"></i>
-                <h3>Mi Github</h3>
-                <p><a href="https://github.com/CristopherGS" target="_blank">CristopherGS</a></p>
-            </div>
-
-            <div class="box">
-                <i class="fab fa-linkedin"></i>
-                <h3>Mi Linkedin</h3>
-                <p><a href="https://github.com/CristopherGS" target="_blank">Cristopher Guerra</a></p>
-            </div>
-
-
-        </div>
-
-        <div class="row">
-
-            <form action="">
-                <div class="inputBox">
-                    <input type="text" placeholder="name">
-                    <input type="email" placeholder="email">
-                </div>
-                <input type="text" placeholder="subject">
-                <textarea name="" id="" cols="30" rows="10" placeholder="message"></textarea>
-                <button class="btn"> send message </button>
-            </form>
-
-            <!-- <iframe class="map"
-                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d30153.788252261566!2d72.82321484621745!3d19.141690214227783!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3be7b63aceef0c69%3A0x2aa80cf2287dfa3b!2sJogeshwari%20West%2C%20Mumbai%2C%20Maharashtra%20400047!5e0!3m2!1sen!2sin!4v1617786516134!5m2!1sen!2sin"
-                allowfullscreen="" loading="lazy"></iframe> -->
-
-        </div>
-
-    </section>
-    
-    <!-- contact section ends -->
-
-    <!-- footer section  -->
-
-    <div class="footer">created by <span> mr. CristopherGS </span> | all rights reserved! ©</div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    <!-- jquery cdn link  -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-
-    <!-- gsap cdn links  -->
     <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/gsap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/ScrollTrigger.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/SplitText.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/Flip.min.js"></script>
-
-    <!-- custom js file link  -->
-    <script src="js/script.js"></script>
-    <script src="js/hero.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/ScrambleTextPlugin.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/lenis@1.3.4/dist/lenis.min.js"></script>
+    <script src="js/packets.js"></script>
+    <script src="js/main.js"></script>
 </body>
 
 </html>
