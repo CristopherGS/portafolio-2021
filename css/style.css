@@ -181,6 +181,46 @@ section{
     border-radius: .5rem;
 }
 
+.home .image .photo{
+    position: relative;
+    display: inline-block;
+}
+
+.home .image .photo img{
+    display: block;
+}
+
+.home .image .photo-curtain{
+    position: absolute;
+    inset: 0;
+    background: var(--main-color);
+    border-radius: .5rem;
+    transform: scaleY(0);
+    pointer-events: none;
+}
+
+/* mientras corre la intro de GSAP, la transición global de * no debe pelear con los tweens */
+.is-intro header *,
+.is-intro .home,
+.is-intro .home *{
+    transition: none !important;
+}
+
+.js-intro #menu,
+.js-intro #theme-toggler,
+.js-intro .home .image,
+.js-intro .home .content{
+    visibility: hidden;
+}
+
+/* SplitText envuelve cada letra; sin esto el capitalize global las pone todas en mayúscula */
+.home .content .hello,
+.home .content .hello *,
+.home .content h3,
+.home .content h3 *{
+    text-transform: none;
+}
+
 .home .content{
     flex:1 1 40rem;
     padding:1rem;
@@ -694,6 +734,7 @@ section{
 
 @media (max-width:768px){
 
+    .home .image .photo,
     .home .image img{
         height: auto;
         width: 100%;

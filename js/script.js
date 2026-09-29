@@ -12,10 +12,11 @@ $(document).ready(function(){
 
   // portfolio filter: GSAP Flip rearranges the cards smoothly
 
-  gsap.registerPlugin(Flip);
-
+  const hasGsap = !!(window.gsap && window.Flip);
   const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  const boxes = gsap.utils.toArray('.portfolio .image-container .box');
+  const boxes = $('.portfolio .image-container .box').toArray();
+
+  if(hasGsap) gsap.registerPlugin(Flip);
 
   $('.portfolio .button-container .btn').click(function(){
 
@@ -23,11 +24,13 @@ $(document).ready(function(){
 
     $(this).addClass('active').siblings().removeClass('active');
 
-    const state = Flip.getState(boxes);
+    const state = hasGsap && Flip.getState(boxes);
 
     boxes.forEach(box => {
       box.style.display = (filter == 'all' || box.classList.contains(filter)) ? '' : 'none';
     });
+
+    if(!hasGsap) return;
 
     Flip.from(state, {
       duration: reduceMotion ? 0 : 0.7,
@@ -43,7 +46,7 @@ $(document).ready(function(){
 
   // subtle 3D tilt on project images
 
-  if(!reduceMotion && window.matchMedia('(hover: hover)').matches){
+  if(hasGsap && !reduceMotion && window.matchMedia('(hover: hover)').matches){
 
     boxes.forEach(box => {
 
