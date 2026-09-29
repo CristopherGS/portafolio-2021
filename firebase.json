@@ -2,12 +2,49 @@
   "hosting": {
     "site": "guerracristofer",
     "public": ".",
-    "ignore": ["firebase.json", "**/.*", "**/node_modules/**", "**/*.md"],
+    "ignore": [
+      "firebase.json",
+      "**/.*",
+      "**/node_modules/**",
+      "**/*.md"
+    ],
     "cleanUrls": true,
     "headers": [
       {
-        "source": "**/*.@(js|css|jpg|jpeg|png|webp|svg|woff2)",
-        "headers": [{ "key": "Cache-Control", "value": "public, max-age=604800" }]
+        "source": "**/*.@(js|css)",
+        "headers": [
+          {
+            "key": "Cache-Control",
+            "value": "public, max-age=300"
+          }
+        ]
+      },
+      {
+        "source": "**/*.@(jpg|jpeg|png|webp|svg|woff2)",
+        "headers": [
+          {
+            "key": "Cache-Control",
+            "value": "public, max-age=604800"
+          }
+        ]
+      },
+      {
+        "source": "**/*.html",
+        "headers": [
+          {
+            "key": "Cache-Control",
+            "value": "no-cache"
+          }
+        ]
+      },
+      {
+        "source": "/",
+        "headers": [
+          {
+            "key": "Cache-Control",
+            "value": "no-cache"
+          }
+        ]
       }
     ]
   }
