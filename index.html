@@ -4,8 +4,45 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cristopher Guerra · Desarrollador backend</title>
-    <meta name="description" content="Portafolio de Cristopher Guerra, desarrollador backend en Guatemala. APIs, bases de datos y la lógica que las une.">
+    <title>Cristopher Guerra · Desarrollador fullstack freelance en Guatemala</title>
+    <meta name="description" content="Cristopher Guerra, desarrollador fullstack en Guatemala: Java, Spring Boot, Angular, Swift e iOS, Oracle SQL. Software en producción para 500 mil+ usuarios. Disponible como freelance para webs, apps y automatizaciones con n8n.">
+    <link rel="canonical" href="https://cristophergs.github.io/portafolio-2021/">
+    <meta name="robots" content="index, follow">
+    <meta property="og:type" content="website">
+    <meta property="og:locale" content="es_GT">
+    <meta property="og:title" content="Cristopher Guerra · Desarrollador fullstack freelance">
+    <meta property="og:description" content="Webs, apps y automatizaciones a medida, de la base de datos a la interfaz.">
+    <meta property="og:url" content="https://cristophergs.github.io/portafolio-2021/">
+    <meta name="twitter:card" content="summary_large_image">
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='12' fill='%232437FF'/%3E%3Ctext x='50%25' y='56%25' text-anchor='middle' dominant-baseline='middle' font-family='Arial Black,Arial' font-weight='900' font-size='28' fill='white'%3ECG%3C/text%3E%3C/svg%3E">
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@graph": [
+            {
+                "@type": "Person",
+                "@id": "https://cristophergs.github.io/portafolio-2021/#cristopher",
+                "name": "Cristopher Guerra",
+                "jobTitle": "Desarrollador fullstack freelance",
+                "url": "https://cristophergs.github.io/portafolio-2021/",
+                "image": "https://cristophergs.github.io/portafolio-2021/images/cristopher.jpg",
+                "sameAs": ["https://github.com/CristopherGS"],
+                "worksFor": { "@type": "GovernmentOrganization", "name": "Contraloría General de Cuentas de Guatemala" },
+                "alumniOf": { "@type": "CollegeOrUniversity", "name": "Universidad Rafael Landívar" },
+                "knowsAbout": ["Desarrollo fullstack", "Java", "Spring Boot", "Angular", "TypeScript", "Swift", "SwiftUI", "Oracle SQL", "APIs REST", "Desarrollo iOS", "Automatización con n8n"]
+            },
+            {
+                "@type": "ProfessionalService",
+                "name": "Cristopher Guerra · Desarrollo a medida",
+                "url": "https://cristophergs.github.io/portafolio-2021/",
+                "founder": { "@id": "https://cristophergs.github.io/portafolio-2021/#cristopher" },
+                "areaServed": ["Guatemala", "Latinoamérica", "Remoto"],
+                "address": { "@type": "PostalAddress", "addressCountry": "GT" },
+                "serviceType": ["Desarrollo de sitios web", "Desarrollo de aplicaciones", "APIs y bases de datos", "Automatización de procesos con n8n"]
+            }
+        ]
+    }
+    </script>
     <meta name="theme-color" content="#DCDFE4">
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -29,7 +66,8 @@
         </p>
         <nav class="bar__nav" aria-label="Secciones">
             <a href="#sobre-mi">Sobre mí</a>
-            <a href="#stack">Stack</a>
+            <a href="#servicios">Servicios</a>
+            <a href="#experiencia">Experiencia</a>
             <a href="#proyectos">Proyectos</a>
             <a href="#contacto" class="bar__cta">Contacto</a>
         </nav>
@@ -40,18 +78,18 @@
         <!-- 1 · PORTADA -->
         <section class="hero" id="inicio" data-method="GET" data-path="/">
             <canvas class="hero__canvas" aria-hidden="true"></canvas>
-            <h1 class="sr-only">Cristopher Guerra, desarrollador backend</h1>
+            <h1 class="sr-only">Cristopher Guerra, desarrollador fullstack freelance en Guatemala</h1>
 
             <div class="hero__meta">
                 <p class="mono hero__req"><span>GET</span> /cristopher-guerra HTTP/1.1</p>
-                <p class="mono hero__res"><span class="dot"></span>200 OK · Guatemala</p>
+                <p class="mono hero__res"><span class="dot"></span>200 OK · Disponible para proyectos freelance</p>
             </div>
 
             <div class="hero__foot">
-                <p class="hero__lead">Desarrollador backend. Construyo lo que no se ve: APIs, bases de datos y la lógica que las une.</p>
+                <p class="hero__lead">Desarrollador fullstack con 4+ años de software en producción para más de 500 mil usuarios. Construyo webs, apps iOS y automatizaciones a medida.</p>
                 <div class="hero__actions">
-                    <a class="btn btn--solid magnetic" href="#proyectos">Ver proyectos</a>
-                    <a class="btn magnetic" href="cv/CV.pdf" download>Descargar CV</a>
+                    <a class="btn btn--solid magnetic" href="#contacto">Cotizar un proyecto</a>
+                    <a class="btn magnetic" href="#proyectos">Ver proyectos</a>
                 </div>
             </div>
 
@@ -63,9 +101,10 @@
             <div class="about__inner">
                 <p class="eyebrow mono">GET /sobre-mi</p>
                 <p class="about__text">
-                    Hola, soy Cristopher. Estudio Ingeniería en Informática y Sistemas en la Universidad Rafael Landívar
-                    y me gusta el lado del software que casi nadie mira: dónde viven los datos, cómo viajan y por qué
-                    responden rápido. Aprendo tecnologías nuevas todo el tiempo, y sobre todo aprendo de los demás.
+                    Hola, soy Cristopher. Desde 2022 construyo software en producción a escala nacional en la Contraloría
+                    General de Cuentas de Guatemala: APIs en Java y Spring Boot, sistemas en Angular, apps iOS en Swift
+                    y bases de datos Oracle. Lo llevo de punta a punta, hasta publicarlo en la App Store. Ahora también
+                    tomo proyectos freelance a medida.
                 </p>
                 <figure class="about__photo">
                     <img src="images/cristopher.jpg" alt="Foto de Cristopher Guerra" width="664" height="880" loading="lazy">
@@ -74,68 +113,140 @@
             </div>
         </section>
 
-        <!-- 3 · STACK como resultado de una consulta -->
-        <section class="stack" id="stack" data-method="SELECT" data-path="* FROM stack">
-            <div class="stack__inner">
-                <p class="eyebrow mono">mysql&gt;</p>
-                <h2 class="stack__query mono" aria-label="Consulta: seleccionar tecnología y nivel desde stack, ordenado por nivel">
-                    <span class="stack__typed">SELECT tecnologia, nivel FROM stack ORDER BY nivel DESC;</span><span class="caret"></span>
-                </h2>
+        <!-- CIFRAS como cabeceras de respuesta -->
+        <section class="proof" id="resultados" aria-label="Resultados" data-method="HEAD" data-path="/resultados">
+            <p class="proof__status mono">HTTP/1.1 200 OK</p>
+            <dl class="proof__list">
+                <div class="proof__item"><dt class="mono">X-Usuarios-Atendidos</dt><dd><span class="count" data-to="500">500</span>K+</dd></div>
+                <div class="proof__item"><dt class="mono">X-Apps-iOS-Publicadas</dt><dd><span class="count" data-to="2">2</span></dd></div>
+                <div class="proof__item"><dt class="mono">X-Años-En-Produccion</dt><dd><span class="count" data-to="4">4</span>+</dd></div>
+                <div class="proof__item"><dt class="mono">X-Downtime</dt><dd><span class="count" data-to="0">0</span></dd><p class="mono">al extender un sistema legado de 20+ años</p></div>
+            </dl>
+        </section>
 
-                <div class="table" role="table" aria-label="Tecnologías y nivel de dominio">
-                    <div class="table__head mono" role="row">
-                        <span role="columnheader">tecnologia</span>
-                        <span role="columnheader">tipo</span>
-                        <span role="columnheader">nivel</span>
-                    </div>
-                    <!-- datos del portafolio original -->
-                    <div class="row" role="row" data-level="94"><span role="cell" class="row__name">MySQL</span><span role="cell" class="row__type mono">base de datos</span><span role="cell" class="row__lvl"><i class="row__bar"></i><b class="row__num mono">94</b></span></div>
-                    <div class="row" role="row" data-level="77"><span role="cell" class="row__name">MariaDB</span><span role="cell" class="row__type mono">base de datos</span><span role="cell" class="row__lvl"><i class="row__bar"></i><b class="row__num mono">77</b></span></div>
-                    <div class="row" role="row" data-level="75"><span role="cell" class="row__name">MongoDB</span><span role="cell" class="row__type mono">base de datos</span><span role="cell" class="row__lvl"><i class="row__bar"></i><b class="row__num mono">75</b></span></div>
-                    <div class="row" role="row" data-level="65"><span role="cell" class="row__name">JavaScript</span><span role="cell" class="row__type mono">lenguaje</span><span role="cell" class="row__lvl"><i class="row__bar"></i><b class="row__num mono">65</b></span></div>
-                    <div class="row" role="row" data-level="65"><span role="cell" class="row__name">HTML</span><span role="cell" class="row__type mono">lenguaje</span><span role="cell" class="row__lvl"><i class="row__bar"></i><b class="row__num mono">65</b></span></div>
-                    <div class="row" role="row" data-level="55"><span role="cell" class="row__name">Java</span><span role="cell" class="row__type mono">lenguaje</span><span role="cell" class="row__lvl"><i class="row__bar"></i><b class="row__num mono">55</b></span></div>
-                    <div class="row" role="row" data-level="45"><span role="cell" class="row__name">CSS</span><span role="cell" class="row__type mono">lenguaje</span><span role="cell" class="row__lvl"><i class="row__bar"></i><b class="row__num mono">45</b></span></div>
-                    <div class="row" role="row" data-level="35"><span role="cell" class="row__name">Node.js</span><span role="cell" class="row__type mono">entorno</span><span role="cell" class="row__lvl"><i class="row__bar"></i><b class="row__num mono">35</b></span></div>
+        <!-- 3 · SERVICIOS -->
+        <section class="services" id="servicios" data-method="GET" data-path="/servicios">
+            <div class="services__inner">
+                <p class="eyebrow mono">GET /servicios · freelance</p>
+                <h2 class="services__title">Lo que puedo construir para tu negocio</h2>
+
+                <ul class="svc">
+                    <li class="svc__row">
+                        <span class="svc__path mono">/web</span>
+                        <h3 class="svc__name">Sitios web a medida</h3>
+                        <p class="svc__desc">Webs corporativas, landing pages y portafolios rápidos, preparados para aparecer en Google y fáciles de mantener.</p>
+                    </li>
+                    <li class="svc__row">
+                        <span class="svc__path mono">/apps</span>
+                        <h3 class="svc__name">Aplicaciones web</h3>
+                        <p class="svc__desc">Sistemas internos, paneles y plataformas con usuarios, roles y reportes. Lo que hoy haces en hojas de cálculo, en una app.</p>
+                    </li>
+                    <li class="svc__row">
+                        <span class="svc__path mono">/api</span>
+                        <h3 class="svc__name">APIs y bases de datos</h3>
+                        <p class="svc__desc">Bases de datos bien diseñadas y APIs que conectan tus sistemas entre sí, con buen rendimiento desde el primer día.</p>
+                    </li>
+                    <li class="svc__row">
+                        <span class="svc__path mono">/automatizacion</span>
+                        <h3 class="svc__name">Automatizaciones con n8n</h3>
+                        <p class="svc__desc">Formularios, correos, avisos y reportes que se hacen solos. El formulario de contacto de esta página es un ejemplo en vivo.</p>
+                    </li>
+                </ul>
+
+                <div class="process">
+                    <p class="eyebrow mono">Cómo trabajamos</p>
+                    <ol class="process__list">
+                        <li><b class="mono">1</b><h3>Conversamos</h3><p>Una llamada para entender tu problema y lo que necesitas lograr.</p></li>
+                        <li><b class="mono">2</b><h3>Propuesta</h3><p>Alcance, tiempos y costo por escrito, antes de empezar.</p></li>
+                        <li><b class="mono">3</b><h3>Desarrollo</h3><p>Avances frecuentes que puedes probar y comentar.</p></li>
+                        <li><b class="mono">4</b><h3>Entrega</h3><p>Lo publicamos, te explico cómo usarlo y quedo para soporte.</p></li>
+                    </ol>
                 </div>
-
-                <p class="stack__foot mono">8 rows in set (0.04 sec)</p>
             </div>
         </section>
 
-        <!-- 4 · PROYECTOS en scroll horizontal -->
+        <!-- 4 · STACK como resultado de una consulta -->
+        <section class="stack" id="stack" data-method="SELECT" data-path="* FROM stack">
+            <div class="stack__inner">
+                <p class="eyebrow mono">oracle&gt;</p>
+                <h2 class="stack__query mono" aria-label="Consulta: seleccionar capa y tecnologías desde stack">
+                    <span class="stack__typed">SELECT capa, tecnologias FROM stack WHERE en_produccion = 1;</span><span class="caret"></span>
+                </h2>
+
+                <div class="table" role="table" aria-label="Tecnologías por capa">
+                    <div class="table__head mono" role="row">
+                        <span role="columnheader">capa</span>
+                        <span role="columnheader">tecnologias</span>
+                    </div>
+                    <div class="row" role="row"><span role="cell" class="row__name">backend</span><span role="cell" class="row__tech">Java · Spring Boot · Java EE · APIs REST · Maven</span></div>
+                    <div class="row" role="row"><span role="cell" class="row__name">frontend</span><span role="cell" class="row__tech">Angular · TypeScript · JavaScript · HTML · CSS</span></div>
+                    <div class="row" role="row"><span role="cell" class="row__name">movil</span><span role="cell" class="row__tech">Swift · SwiftUI · publicación en App Store</span></div>
+                    <div class="row" role="row"><span role="cell" class="row__name">datos</span><span role="cell" class="row__tech">Oracle SQL · NoSQL · Firebase · Power BI</span></div>
+                    <div class="row" role="row"><span role="cell" class="row__name">integraciones</span><span role="cell" class="row__tech">Biometría RENAP · pagos NeoNet / VisaNet</span></div>
+                    <div class="row" role="row"><span role="cell" class="row__name">automatizacion</span><span role="cell" class="row__tech">n8n · webhooks · correos y avisos automáticos</span></div>
+                    <div class="row" role="row"><span role="cell" class="row__name">equipo</span><span role="cell" class="row__tech">Scrum · arquitectura limpia · Git</span></div>
+                </div>
+
+                <p class="stack__foot mono">7 rows selected (0.04 sec)</p>
+            </div>
+        </section>
+
+        <!-- 5 · PROYECTOS en scroll horizontal -->
         <section class="work" id="proyectos" data-method="GET" data-path="/proyectos">
             <div class="work__track">
                 <div class="work__intro">
-                    <p class="eyebrow mono">GET /proyectos · 3 resultados</p>
+                    <p class="eyebrow mono">GET /proyectos · 5 resultados</p>
                     <h2 class="work__title">Proyec<br>tos</h2>
-                    <p class="work__note">Cosas que construí aprendiendo. Desliza para verlas.</p>
+                    <p class="work__note">Software en producción que usan miles de personas en Guatemala. Desliza para verlo.</p>
                 </div>
 
                 <article class="card">
-                    <div class="card__media"><img src="images/glosarioweb.png" alt="Captura de Glosario web: índice de la A a la Z con tarjetas de términos" loading="lazy"></div>
+                    <div class="card__visual card__visual--phone" aria-hidden="true"><div class="phone"><span class="phone__notch"></span><b class="phone__title">Contraloría GT</b><i class="phone__line" style="--w:90%"></i><i class="phone__line" style="--w:70%"></i><i class="phone__line" style="--w:80%"></i><i class="phone__line" style="--w:55%"></i><span class="phone__btn"></span></div></div>
                     <div class="card__body">
-                        <p class="card__idx mono">{ "id": 1, "tipo": "web" }</p>
-                        <h3 class="card__name">Glosario web</h3>
-                        <p class="card__desc">Glosario colaborativo: la comunidad publica términos, los busca y los filtra con un índice de la A a la Z. Incluye inicio de sesión, edición y revista descargable.</p>
+                        <p class="card__idx mono">{ "plataforma": "iOS", "estado": "publicada" }</p>
+                        <h3 class="card__name">Contraloría GT</h3>
+                        <p class="card__desc">App iOS oficial de la Contraloría General de Cuentas, publicada en la App Store. Swift, SwiftUI y Oracle SQL.</p>
+                        <a class="card__link mono" href="https://apps.apple.com/gt/app/contralor%C3%ADa-gt/id6451423010" target="_blank" rel="noopener">Ver en App Store ↗</a>
                     </div>
                 </article>
 
                 <article class="card">
-                    <div class="card__media"><img src="images/giffAPI.png" alt="Captura de GifExpert: cuadrícula de GIFs de One Punch Man" loading="lazy"></div>
+                    <div class="card__visual card__visual--phone" aria-hidden="true"><div class="phone"><span class="phone__notch"></span><b class="phone__title">ColaboradorCGC</b><i class="phone__line" style="--w:80%"></i><i class="phone__line" style="--w:60%"></i><i class="phone__line" style="--w:90%"></i><i class="phone__line" style="--w:45%"></i><span class="phone__btn"></span></div></div>
                     <div class="card__body">
-                        <p class="card__idx mono">{ "id": 2, "tipo": "web" }</p>
-                        <h3 class="card__name">GifExpert</h3>
-                        <p class="card__desc">Buscador de GIFs que consume una API externa y muestra los resultados por categoría en una cuadrícula.</p>
+                        <p class="card__idx mono">{ "plataforma": "iOS", "estado": "publicada" }</p>
+                        <h3 class="card__name">ColaboradorCGC</h3>
+                        <p class="card__desc">App iOS para los colaboradores de la institución, construida y publicada de punta a punta.</p>
+                        <a class="card__link mono" href="https://apps.apple.com/gt/app/id6755486789" target="_blank" rel="noopener">Ver en App Store ↗</a>
                     </div>
                 </article>
 
                 <article class="card">
-                    <div class="card__media"><img src="images/desing.png" alt="Captura del reto de diseño: tarjeta de resumen de pedido" loading="lazy"></div>
+                    <div class="card__visual card__visual--term " aria-hidden="true"><div class="term"><p class="term__bar"><i></i><i></i><i></i><b>sirefa</b></p><p class="term__body mono"><span>&gt; POST /biometria/verificar</span><span>&lt; RENAP · 200 OK</span><span>&gt; registro firmado</span></p></div></div>
                     <div class="card__body">
-                        <p class="card__idx mono">{ "id": 3, "tipo": "diseño" }</p>
-                        <h3 class="card__name">Reto de diseño</h3>
-                        <p class="card__desc">Maquetación fiel de una tarjeta de resumen de pedido a partir de un diseño dado, con HTML y CSS.</p>
+                        <p class="card__idx mono">{ "tipo": "integración", "con": "RENAP" }</p>
+                        <h3 class="card__name">SIREFA</h3>
+                        <p class="card__desc">Módulo biométrico integrado con RENAP para servidores públicos. Java, Spring Boot y Angular.</p>
+                        <a class="card__link mono" href="https://www.contraloria.gob.gt/wp-content/uploads/2025/02/BOLETIN-5-2025-CGC-SOLVENTA-DUDAS-A-SERVIDORES-PUBLICOS-SOBRE-EL-USO-DE-APLICACION-SIREFA.pdf" target="_blank" rel="noopener">Leer boletín oficial ↗</a>
+                    </div>
+                </article>
+
+                <article class="card">
+                    <div class="card__visual card__visual--term term--green" aria-hidden="true"><div class="term"><p class="term__bar"><i></i><i></i><i></i><b>pagos</b></p><p class="term__body mono"><span>&gt; POST /pagos/cobro</span><span>&lt; NeoNet · aprobado</span><span>&lt; VisaNet · aprobado</span></p></div></div>
+                    <div class="card__body">
+                        <p class="card__idx mono">{ "tipo": "integración", "con": "NeoNet · VisaNet" }</p>
+                        <h3 class="card__name">Pagos en línea</h3>
+                        <p class="card__desc">Integración de cobros con tarjeta mediante NeoNet y VisaNet dentro de los sistemas institucionales.</p>
+                        <span class="card__link card__link--off mono">Proyecto interno</span>
+                    </div>
+                </article>
+
+                <article class="card">
+                    <div class="card__visual card__visual--term term--paper" aria-hidden="true"><div class="term"><p class="term__bar"><i></i><i></i><i></i><b>finiquitos</b></p><p class="term__body mono"><span>&gt; sistema legado · 20+ años</span><span>&gt; nuevos módulos desplegados</span><span>&lt; downtime: 0 min</span></p></div></div>
+                    <div class="card__body">
+                        <p class="card__idx mono">{ "tipo": "sistema interno" }</p>
+                        <h3 class="card__name">Sistema de Finiquitos</h3>
+                        <p class="card__desc">Extendí un sistema crítico con más de 20 años en uso, sin interrumpir el servicio ni un minuto.</p>
+                        <span class="card__link card__link--off mono">Proyecto interno</span>
                     </div>
                 </article>
 
@@ -146,53 +257,114 @@
             </div>
         </section>
 
-        <!-- 5 · TRAYECTORIA (orden cronológico real) -->
-        <section class="path" id="trayectoria" data-method="GET" data-path="/trayectoria">
+        <!-- 6 · TRAYECTORIA (orden cronológico real) -->
+        <section class="path" id="experiencia" data-method="GET" data-path="/experiencia">
             <div class="path__inner">
-                <p class="eyebrow mono">GET /trayectoria</p>
-                <h2 class="path__title">Trayectoria</h2>
+                <p class="eyebrow mono">GET /experiencia</p>
+                <h2 class="path__title">Experiencia</h2>
                 <div class="path__body">
                 <span class="path__rail" aria-hidden="true"></span>
                 <ol class="path__list">
                     <li class="step">
-                        <span class="step__when mono">Hoy</span>
-                        <h3>Universidad Rafael Landívar</h3>
-                        <p>Ingeniería en Informática y Sistemas. Cursé el 4.º año de la carrera.</p>
+                        <span class="step__when mono">2022 – hoy</span>
+                        <h3>Desarrollador fullstack · Contraloría General de Cuentas</h3>
+                        <p>Apps en Angular y Java EE / Spring Boot para más de 500 mil ciudadanos, 2 apps iOS publicadas, módulo biométrico SIREFA con RENAP, pagos con NeoNet y VisaNet, reportes en Power BI. Equipo Scrum de 5 personas.</p>
                     </li>
                     <li class="step">
-                        <span class="step__when mono">Diversificado</span>
-                        <h3>Colegio Estudios Avanzados Pino Montano</h3>
-                        <p>Bachiller en Computación con Orientación Científica.</p>
+                        <span class="step__when mono">Freelance</span>
+                        <h3>Proyectos a medida</h3>
+                        <p>Webs, apps y automatizaciones con n8n para negocios que necesitan algo hecho a su medida.</p>
                     </li>
                     <li class="step">
-                        <span class="step__when mono">Básico</span>
-                        <h3>Instituto de Educación Básica por Cooperativa</h3>
-                        <p>Diploma de tercer grado básico.</p>
+                        <span class="step__when mono">2018 – en curso</span>
+                        <h3>Ingeniería en Informática y Sistemas · Universidad Rafael Landívar</h3>
+                        <p>Formación en ingeniería de software, bases de datos y sistemas.</p>
+                    </li>
+                    <li class="step">
+                        <span class="step__when mono">Certificación</span>
+                        <h3>Oracle Next Education · Back-end</h3>
+                        <p>343 horas de formación en desarrollo back-end.</p>
                     </li>
                 </ol>
                 </div>
             </div>
         </section>
 
-        <!-- 6 · CONTACTO -->
+        <!-- 7 · CONTACTO -->
         <section class="contact" id="contacto" data-method="POST" data-path="/contacto">
             <div class="marquee" aria-hidden="true">
                 <div class="marquee__inner">
-                    <span>Abierto a proyectos backend · Guatemala · APIs · Bases de datos ·&nbsp;</span>
-                    <span>Abierto a proyectos backend · Guatemala · APIs · Bases de datos ·&nbsp;</span>
+                    <span>Disponible para proyectos freelance · Webs · Apps · APIs · Automatización ·&nbsp;</span>
+                    <span>Disponible para proyectos freelance · Webs · Apps · APIs · Automatización ·&nbsp;</span>
                 </div>
             </div>
 
             <div class="contact__inner">
-                <p class="eyebrow mono">POST /contacto</p>
-                <h2 class="contact__title">¿Hablamos?</h2>
-                <a class="contact__mail magnetic" href="mailto:guerracristofer@gmail.com">guerracristofer@gmail.com</a>
+                <div class="contact__head">
+                    <p class="eyebrow mono">POST /contacto</p>
+                    <h2 class="contact__title">¿Hablamos?</h2>
+                    <p class="contact__lead">Cuéntame tu proyecto. Te respondo en cuanto llega: este formulario está automatizado con n8n y puedes ver cada paso mientras se envía.</p>
+                    <ul class="contact__list">
+                        <li><span class="mono">correo</span><a href="mailto:guerracristofer@gmail.com">guerracristofer@gmail.com</a></li>
+                        <li><span class="mono">whatsapp</span><a href="https://wa.me/50246842943?text=Hola%20Cristopher%2C%20vi%20tu%20portafolio" target="_blank" rel="noopener">Escríbeme por WhatsApp</a></li>
+                        <li><span class="mono">github</span><a href="https://github.com/CristopherGS" target="_blank" rel="noopener">CristopherGS</a></li>
+                    </ul>
+                </div>
 
-                <ul class="contact__list">
-                    <li><span class="mono">whatsapp</span><a href="https://api.whatsapp.com/send/?phone=50246842943&text=Hola%20Cristopher%2C%20vi%20tu%20portafolio" target="_blank" rel="noopener">+502 4684-2943</a></li>
-                    <li><span class="mono">github</span><a href="https://github.com/CristopherGS" target="_blank" rel="noopener">CristopherGS</a></li>
-                    <li><span class="mono">cv</span><a href="cv/CV.pdf" download>Descargar PDF</a></li>
-                </ul>
+                <form class="form" id="contact-form" novalidate>
+                    <div class="form__grid">
+                        <label class="field">
+                            <span class="field__label mono">nombre</span>
+                            <input name="nombre" type="text" autocomplete="name" required maxlength="80" placeholder="Tu nombre">
+                        </label>
+                        <label class="field">
+                            <span class="field__label mono">correo</span>
+                            <input name="correo" type="email" autocomplete="email" required maxlength="120" placeholder="tu@empresa.com">
+                        </label>
+                        <label class="field">
+                            <span class="field__label mono">tipo de proyecto</span>
+                            <select name="tipo" required>
+                                <option value="" disabled selected>Elige una opción</option>
+                                <option>Sitio web</option>
+                                <option>Aplicación web</option>
+                                <option>API o base de datos</option>
+                                <option>Automatización con n8n</option>
+                                <option>Otro</option>
+                            </select>
+                        </label>
+                        <label class="field">
+                            <span class="field__label mono">presupuesto aproximado</span>
+                            <select name="presupuesto">
+                                <option value="" selected>Aún no lo sé</option>
+                                <option>Menos de US$500</option>
+                                <option>US$500 a US$1,500</option>
+                                <option>US$1,500 a US$5,000</option>
+                                <option>Más de US$5,000</option>
+                            </select>
+                        </label>
+                        <label class="field field--full">
+                            <span class="field__label mono">mensaje</span>
+                            <textarea name="mensaje" rows="4" required maxlength="2000" placeholder="¿Qué necesitas construir o automatizar?"></textarea>
+                        </label>
+                        <!-- campo trampa para bots: las personas no lo ven -->
+                        <label class="hp" aria-hidden="true">Empresa<input name="empresa" type="text" tabindex="-1" autocomplete="off"></label>
+                    </div>
+
+                    <div class="form__foot">
+                        <button class="btn btn--solid form__send magnetic" type="submit">Enviar mensaje</button>
+                        <p class="form__error" role="alert"></p>
+                    </div>
+
+                    <!-- recorrido del mensaje por el flujo de n8n -->
+                    <ol class="pipe mono" aria-live="polite">
+                        <li class="pipe__step" data-step="webhook"><i></i>POST /webhook/contacto</li>
+                        <li class="pipe__step" data-step="validar"><i></i>Validar datos y filtrar spam</li>
+                        <li class="pipe__step" data-step="guardar"><i></i>Guardar en el CRM</li>
+                        <li class="pipe__step" data-step="avisar"><i></i>Avisar a Cristopher al celular</li>
+                        <li class="pipe__step" data-step="responder"><i></i>Enviarte un correo de confirmación</li>
+                        <li class="pipe__step pipe__step--ok" data-step="ok"><i></i>200 OK · Mensaje recibido</li>
+                    </ol>
+                </form>
             </div>
 
             <footer class="foot mono">
