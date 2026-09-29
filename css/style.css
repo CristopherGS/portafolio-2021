@@ -28,6 +28,19 @@ html{
     overflow-x: hidden;
 }
 
+/* lenis smooth scroll */
+html.lenis, html.lenis body{
+    height: auto;
+}
+
+.lenis.lenis-stopped{
+    overflow: clip;
+}
+
+.lenis.lenis-smooth iframe{
+    pointer-events: none;
+}
+
 html::-webkit-scrollbar{
     width:1.3rem;
 }
@@ -104,6 +117,7 @@ section{
 
 .heading span{
     color:var(--main-color);
+    display: inline-block;
     text-transform: uppercase;
 }
 
@@ -251,41 +265,10 @@ section{
 
 .about .row .box .progress .bar span{
     height: 100%;
+    width: 0;
     border-radius: .3rem;
     background-color: var(--main-color);
     display: block;
-}
-
-.about .row .box:nth-child(1) .progress:nth-child(2) .bar span{
-    width: 95%;
-}
-
-.about .row .box:nth-child(1) .progress:nth-child(3) .bar span{
-    width: 80%;
-}
-
-.about .row .box:nth-child(1) .progress:nth-child(4) .bar span{
-    width: 65%;
-}
-
-.about .row .box:nth-child(1) .progress:nth-child(5) .bar span{
-    width: 75%;
-}
-
-.about .row .box:nth-child(2) .progress:nth-child(2) .bar span{
-    width: 98%;
-}
-
-.about .row .box:nth-child(2) .progress:nth-child(3) .bar span{
-    width: 67%;
-}
-
-.about .row .box:nth-child(2) .progress:nth-child(4) .bar span{
-    width: 75%;
-}
-
-.about .row .box:nth-child(2) .progress:nth-child(5) .bar span{
-    width: 60%;
 }
 
 .about .row .box .exp-box{
