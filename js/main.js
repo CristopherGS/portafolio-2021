@@ -4,7 +4,7 @@
 
 gsap.registerPlugin(ScrollTrigger, SplitText, ScrambleTextPlugin);
 
-/* URL de producción del webhook de n8n. Vacía = sin conectar todavía. */
+/* URL del webhook que recibe el formulario. Vacía = sin conectar todavía. */
 const CONTACT_WEBHOOK = '';
 
 const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -39,9 +39,14 @@ Promise.all([
 function init() {
     const packets = Packets.create(document.querySelector('.hero__canvas'), { static: reduced });
 
-    if (reduced) { routeIndicator(); staticState(); contactForm(); return; }
+    if (reduced) {
+        document.documentElement.classList.add('is-reduced');
+        routeIndicator(); staticState(); contactForm(); return;
+    }
 
-    intro(packets);
+    loader().then(() => intro(packets));
+    cursor();
+    progressBar();
     heroScroll(packets);
     about();
     proof();
@@ -82,6 +87,51 @@ function routeIndicator() {
                 gsap.to(path, { duration: 0.6, scrambleText: { text: sec.dataset.path, chars: '/_-*abcdefghijklmnopqrstuvwxyz', speed: 0.6 } });
             }
         });
+    });
+}
+
+/* ---------- pantalla de carga ---------- */
+function loader() {
+    return new Promise(resolve => {
+        const el = document.querySelector('.loader');
+        el.style.animation = 'none';
+        const pct = el.querySelector('.loader__pct span');
+        const obj = { v: 0 };
+        gsap.timeline({ onComplete: () => { el.remove(); } })
+            .to('.loader__log span', { autoAlpha: 1, duration: 0.3, stagger: 0.35 })
+            .to(obj, { v: 100, duration: 1.1, ease: 'power2.inOut', onUpdate: () => { pct.textContent = Math.round(obj.v); } }, 0)
+            .to(el, { yPercent: -100, duration: 0.9, ease: 'power4.inOut' }, '+=0.15')
+            .add(resolve, '-=0.55');
+    });
+}
+
+/* ---------- cursor con etiqueta ---------- */
+function cursor() {
+    if (!finePointer) return;
+    const el = document.querySelector('.cursor');
+    const label = el.querySelector('.cursor__label');
+    document.documentElement.classList.add('has-cursor');
+    const xTo = gsap.quickTo(el, 'x', { duration: 0.35, ease: 'power3.out' });
+    const yTo = gsap.quickTo(el, 'y', { duration: 0.35, ease: 'power3.out' });
+    window.addEventListener('pointermove', e => {
+        xTo(e.clientX); yTo(e.clientY);
+        el.style.opacity = 1;
+    });
+    document.addEventListener('pointerleave', () => { el.style.opacity = 0; });
+    document.addEventListener('pointerover', e => {
+        const big = e.target.closest('[data-cursor]');
+        const link = !big && e.target.closest('a, button, select, .svc__row');
+        el.classList.toggle('is-big', !!big);
+        el.classList.toggle('is-link', !!link);
+        label.textContent = big ? big.dataset.cursor : '';
+    });
+}
+
+/* ---------- progreso de lectura en la barra ---------- */
+function progressBar() {
+    gsap.to('.bar__progress', {
+        scaleX: 1, ease: 'none',
+        scrollTrigger: { start: 0, end: 'max', scrub: 0.3 }
     });
 }
 
@@ -239,6 +289,16 @@ function work() {
                 xPercent: -12, rotate: -2, ease: 'none',
                 scrollTrigger: { trigger: card, containerAnimation: scroll, start: 'left right', end: 'right left', scrub: true }
             });
+            // inclinación 3D al pasar el cursor
+            const rx = gsap.quickTo(media, 'rotationX', { duration: 0.6, ease: 'power3.out' });
+            const ry = gsap.quickTo(media, 'rotationY', { duration: 0.6, ease: 'power3.out' });
+            media.addEventListener('pointermove', e => {
+                const b = media.getBoundingClientRect();
+                ry(((e.clientX - b.left) / b.width - 0.5) * 10);
+                rx(-((e.clientY - b.top) / b.height - 0.5) * 10);
+            });
+            media.addEventListener('pointerleave', () => { rx(0); ry(0); });
+
             gsap.from(card.querySelectorAll('.card__body > *'), {
                 y: 30, autoAlpha: 0, stagger: 0.08, duration: 0.8, ease: 'power3.out',
                 scrollTrigger: { trigger: card, containerAnimation: scroll, start: 'left 60%', toggleActions: 'play none none reverse' }
@@ -270,6 +330,10 @@ function path() {
         scaleY: 1, ease: 'none',
         scrollTrigger: { trigger: '.path__body', start: 'top 70%', end: 'bottom 70%', scrub: true }
     });
+    gsap.from('.cvcard', {
+        y: 60, autoAlpha: 0, duration: 1, ease: 'power3.out',
+        scrollTrigger: { trigger: '.cvcard', start: 'top 85%' }
+    });
     gsap.utils.toArray('.step').forEach(step => {
         gsap.from(step, {
             x: 40, autoAlpha: 0, duration: 0.9, ease: 'power3.out',
@@ -297,7 +361,7 @@ function contact() {
         .from('.form', { y: 60, autoAlpha: 0, duration: 1, ease: 'power3.out' }, 0.3);
 }
 
-/* ---------- formulario: el mensaje recorre el flujo de n8n ---------- */
+/* ---------- formulario: el mensaje recorre la automatización ---------- */
 function contactForm() {
     const form = document.getElementById('contact-form');
     const send = form.querySelector('.form__send');
@@ -350,7 +414,7 @@ function contactForm() {
         let failed = false;
         request.catch(() => { failed = true; });
 
-        // animamos los pasos mientras n8n trabaja; el último espera la respuesta real
+        // animamos los pasos mientras el servidor trabaja; el último espera la respuesta real
         for (let i = 0; i < steps.length - 1; i++) {
             setStep(i, 'is-active');
             await wait(550);
