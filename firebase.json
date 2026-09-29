@@ -1,0 +1,14 @@
+{
+  "hosting": {
+    "site": "guerracristofer",
+    "public": ".",
+    "ignore": ["firebase.json", "**/.*", "**/node_modules/**", "**/*.md"],
+    "cleanUrls": true,
+    "headers": [
+      {
+        "source": "**/*.@(js|css|jpg|jpeg|png|webp|svg|woff2)",
+        "headers": [{ "key": "Cache-Control", "value": "public, max-age=604800" }]
+      }
+    ]
+  }
+}

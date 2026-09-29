@@ -529,3 +529,38 @@ ol, ul { list-style: none; }
     .about__text .word { opacity: 1; }
     * { transition-duration: 0s !important; }
 }
+
+/* ---------- aviso de cookies ---------- */
+.cookie-banner {
+    position: fixed;
+    left: var(--gutter);
+    right: var(--gutter);
+    bottom: 16px;
+    z-index: 9000;
+    max-width: 560px;
+    margin-left: auto;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 12px 20px;
+    padding: 16px 18px;
+    background: var(--ink);
+    color: var(--paper);
+    border-radius: 14px;
+    font-size: 14px;
+    line-height: 1.45;
+    box-shadow: 0 12px 40px rgb(11 13 18 / .25);
+}
+.cookie-banner p { flex: 1 1 260px; }
+.cookie-banner div { display: flex; gap: 8px; }
+.cookie-banner button {
+    font: 500 13px/1 var(--mono);
+    padding: 10px 14px;
+    border-radius: 999px;
+    border: 1px solid rgb(241 242 244 / .35);
+    background: transparent;
+    color: var(--paper);
+    cursor: pointer;
+}
+.cookie-banner button[data-c="si"] { background: var(--cobalt); border-color: var(--cobalt); color: #fff; }
+.cookie-banner button:focus-visible { outline: 2px solid var(--signal); outline-offset: 2px; }

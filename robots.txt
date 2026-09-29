@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://cristophergs.github.io/portafolio-2021/sitemap.xml
+Sitemap: https://guerracristofer.web.app/sitemap.xml
