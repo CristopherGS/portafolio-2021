@@ -38,6 +38,7 @@ function banner() {
         if (c === "si") iniciar();
     });
     document.body.appendChild(b);
+    if (window.I18N) window.I18N.translate(b); // el aviso sale en el idioma elegido
 }
 
 let pref = null;

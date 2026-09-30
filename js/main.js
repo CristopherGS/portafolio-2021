@@ -38,30 +38,58 @@ Promise.all([
     document.fonts.load('700 12px "JetBrains Mono"')
 ]).catch(() => { }).then(init);
 
+/* Las animaciones ligadas al scroll viven en un contexto para poder
+   deshacerlas y rehacerlas cuando cambia el idioma (el texto cambia de largo). */
+let packets = null, scrollCtx = null, splits = [];
+const keepSplit = sp => (splits.push(sp), sp);
+const desktopMQ = window.matchMedia('(min-width: 821px)');
+
+function setupScroll() {
+    scrollCtx = gsap.context(() => {
+        heroScroll(packets);
+        about();
+        proof();
+        services();
+        stack();
+        work();
+        path();
+        certs();
+        contact();
+        routeIndicator(); // al final: así sus posiciones ya cuentan los pins
+    });
+}
+
+function teardownScroll() {
+    if (scrollCtx) scrollCtx.revert();
+    splits.forEach(sp => sp.revert());
+    scrollCtx = null; splits = [];
+}
+
+// al cruzar el punto de corte móvil/escritorio se rehacen las animaciones
+desktopMQ.addEventListener('change', () => {
+    if (!scrollCtx) return;
+    teardownScroll(); setupScroll(); ScrollTrigger.refresh();
+});
+
 function init() {
-    const packets = Packets.create(document.querySelector('.hero__canvas'), { static: reduced });
+    packets = Packets.create(document.querySelector('.hero__canvas'), { static: reduced });
 
     if (reduced) {
         document.documentElement.classList.add('is-reduced');
-        routeIndicator(); staticState(); contactForm(); themeToggle(); return;
+        routeIndicator(); staticState(); contactForm(); themeToggle(); langToggle(); return;
     }
 
     loader().then(() => intro(packets));
     cursor();
     progressBar();
-    heroScroll(packets);
-    about();
-    proof();
-    services();
-    stack();
-    work();
-    path();
-    contact();
+    marquee();
+    tilt();
+    setupScroll();
     magnetic();
     hideBarOnScroll();
     contactForm();
     themeToggle();
-    routeIndicator(); // al final: así sus posiciones ya cuentan los pins
+    langToggle();
 
     ScrollTrigger.refresh();
 }
@@ -162,10 +190,9 @@ function heroScroll(packets) {
 
 /* ---------- sobre mí: el texto se "enciende" palabra por palabra ---------- */
 function about() {
-    const split = SplitText.create('.about__text', { type: 'words', wordsClass: 'word' });
-    const mm = gsap.matchMedia();
+    const split = keepSplit(SplitText.create('.about__text', { type: 'words', wordsClass: 'word' }));
 
-    mm.add('(min-width: 821px)', () => {
+    if (desktopMQ.matches) {
         const tl = gsap.timeline({
             scrollTrigger: { trigger: '.about', start: 'top top', end: '+=140%', pin: true, scrub: 0.6 }
         });
@@ -173,9 +200,7 @@ function about() {
             .fromTo('.about__photo img',
                 { clipPath: 'inset(100% 0% 0% 0%)', scale: 1.25 },
                 { clipPath: 'inset(0% 0% 0% 0%)', scale: 1.05, ease: 'power2.out', duration: split.words.length * 0.05 }, 0);
-    });
-
-    mm.add('(max-width: 820px)', () => {
+    } else {
         gsap.to(split.words, {
             opacity: 1, stagger: 0.1, ease: 'none',
             scrollTrigger: { trigger: '.about__text', start: 'top 80%', end: 'bottom 50%', scrub: true }
@@ -184,7 +209,7 @@ function about() {
             clipPath: 'inset(100% 0% 0% 0%)', duration: 1.2, ease: 'power3.out',
             scrollTrigger: { trigger: '.about__photo', start: 'top 85%' }
         });
-    });
+    }
 }
 
 /* ---------- cifras: cuentan al entrar ---------- */
@@ -208,7 +233,7 @@ function proof() {
 
 /* ---------- servicios: título por líneas y filas que entran ---------- */
 function services() {
-    const title = SplitText.create('.services__title', { type: 'lines', mask: 'lines' });
+    const title = keepSplit(SplitText.create('.services__title', { type: 'lines', mask: 'lines' }));
     gsap.from(title.lines, {
         yPercent: 110, duration: 1.1, stagger: 0.1, ease: 'power4.out',
         scrollTrigger: { trigger: '.services__title', start: 'top 80%' }
@@ -228,7 +253,7 @@ function services() {
 /* ---------- stack: se escribe la consulta y llegan las filas ---------- */
 function stack() {
     const typed = document.querySelector('.stack__typed');
-    const full = typed.textContent;
+    const full = typed.dataset.q;
     typed.textContent = '';
     const rows = gsap.utils.toArray('.row');
     gsap.set(rows, { autoAlpha: 0, y: 24 });
@@ -254,10 +279,9 @@ function stack() {
 function work() {
     const section = document.querySelector('.work');
     const track = document.querySelector('.work__track');
-    const title = SplitText.create('.work__title', { type: 'chars', mask: 'chars' });
-    const mm = gsap.matchMedia();
+    const title = keepSplit(SplitText.create('.work__title', { type: 'chars', mask: 'chars' }));
 
-    mm.add('(min-width: 821px)', () => {
+    if (desktopMQ.matches) {
         const distance = () => track.scrollWidth - window.innerWidth;
 
         const scroll = gsap.to(track, {
@@ -292,24 +316,12 @@ function work() {
                 xPercent: -12, rotate: -2, ease: 'none',
                 scrollTrigger: { trigger: card, containerAnimation: scroll, start: 'left right', end: 'right left', scrub: true }
             });
-            // inclinación 3D al pasar el cursor
-            const rx = gsap.quickTo(media, 'rotationX', { duration: 0.6, ease: 'power3.out' });
-            const ry = gsap.quickTo(media, 'rotationY', { duration: 0.6, ease: 'power3.out' });
-            media.addEventListener('pointermove', e => {
-                const b = media.getBoundingClientRect();
-                ry(((e.clientX - b.left) / b.width - 0.5) * 10);
-                rx(-((e.clientY - b.top) / b.height - 0.5) * 10);
-            });
-            media.addEventListener('pointerleave', () => { rx(0); ry(0); });
-
             gsap.from(card.querySelectorAll('.card__body > *'), {
                 y: 30, autoAlpha: 0, stagger: 0.08, duration: 0.8, ease: 'power3.out',
                 scrollTrigger: { trigger: card, containerAnimation: scroll, start: 'left 60%', toggleActions: 'play none none reverse' }
             });
         });
-    });
-
-    mm.add('(max-width: 820px)', () => {
+    } else {
         gsap.from(title.chars, {
             yPercent: 110, duration: 1, stagger: 0.04, ease: 'power4.out',
             scrollTrigger: { trigger: '.work__title', start: 'top 85%' }
@@ -320,7 +332,7 @@ function work() {
                 scrollTrigger: { trigger: el, start: 'top 85%' }
             });
         });
-    });
+    }
 }
 
 /* ---------- trayectoria: la línea se dibuja con el scroll ---------- */
@@ -346,8 +358,8 @@ function path() {
 }
 
 /* ---------- contacto ---------- */
-function contact() {
-    // marquesina infinita que acelera con la velocidad del scroll
+/* marquesina infinita que acelera con la velocidad del scroll */
+function marquee() {
     const loop = gsap.to('.marquee__inner', { xPercent: -50, duration: 22, ease: 'none', repeat: -1 });
     if (lenis) {
         lenis.on('scroll', ({ velocity }) => {
@@ -355,8 +367,46 @@ function contact() {
             gsap.to(loop, { timeScale: velocity < 0 ? -boost : boost, duration: 0.3, overwrite: true });
         });
     }
+}
 
-    const title = SplitText.create('.contact__title', { type: 'chars', mask: 'chars' });
+/* inclinación 3D al pasar el cursor: proyectos y certificados */
+function tilt() {
+    if (!finePointer) return;
+    const add = (el, deg, shine) => {
+        const rx = gsap.quickTo(el, 'rotationX', { duration: 0.6, ease: 'power3.out' });
+        const ry = gsap.quickTo(el, 'rotationY', { duration: 0.6, ease: 'power3.out' });
+        el.addEventListener('pointermove', e => {
+            const b = el.getBoundingClientRect();
+            const px = (e.clientX - b.left) / b.width, py = (e.clientY - b.top) / b.height;
+            ry((px - 0.5) * deg); rx(-(py - 0.5) * deg);
+            if (shine) { el.style.setProperty('--mx', px * 100 + '%'); el.style.setProperty('--my', py * 100 + '%'); }
+        });
+        el.addEventListener('pointerleave', () => { rx(0); ry(0); });
+    };
+    document.querySelectorAll('.card__visual').forEach(el => add(el, 10));
+    document.querySelectorAll('.cert').forEach(el => add(el, 8, true));
+}
+
+/* ---------- certificaciones: las tarjetas se revelan y el papel se mueve ---------- */
+function certs() {
+    const title = keepSplit(SplitText.create('.certs__title', { type: 'chars', mask: 'chars' }));
+    gsap.timeline({ scrollTrigger: { trigger: '.certs', start: 'top 70%' } })
+        .from(title.chars, { yPercent: 110, duration: 1, stagger: 0.035, ease: 'power4.out' })
+        .from('.certs__lead', { y: 24, autoAlpha: 0, duration: 0.8, ease: 'power3.out' }, 0.3);
+
+    gsap.utils.toArray('.cert').forEach((card, i) => {
+        const frame = card.querySelector('.cert__img');
+        const img = frame.querySelector('img');
+        gsap.timeline({ scrollTrigger: { trigger: card, start: 'top 85%' } })
+            .from(card, { y: 90, rotate: i % 2 ? 4 : -4, autoAlpha: 0, duration: 1.1, ease: 'power3.out' })
+            .fromTo(frame, { clipPath: 'inset(0% 0% 100% 0%)' }, { clipPath: 'inset(0% 0% 0% 0%)', duration: 1.2, ease: 'power4.inOut' }, 0.15)
+            .from(img, { scale: 1.35, duration: 1.6, ease: 'power3.out' }, 0.15)
+            .from(card.querySelectorAll('.cert__body > *'), { y: 20, autoAlpha: 0, duration: 0.6, stagger: 0.07, ease: 'power3.out' }, 0.5);
+    });
+}
+
+function contact() {
+    const title = keepSplit(SplitText.create('.contact__title', { type: 'chars', mask: 'chars' }));
     const tl = gsap.timeline({ scrollTrigger: { trigger: '.contact__inner', start: 'top 75%' } });
     tl.from(title.chars, { yPercent: 110, duration: 1, stagger: 0.05, ease: 'power4.out' })
         .from('.contact__lead', { y: 30, autoAlpha: 0, duration: 0.8, ease: 'power3.out' }, '-=0.6')
@@ -392,7 +442,7 @@ function contactForm() {
         e.preventDefault();
         error.textContent = '';
         error.classList.remove('is-ok');
-        if (!validate()) { error.textContent = 'Revisa los campos marcados en naranja.'; return; }
+        if (!validate()) { error.textContent = I18N.t('form.invalid'); return; }
         const data = Object.fromEntries(new FormData(form));
         if (data.empresa) return; // bot
         delete data.empresa;
@@ -401,7 +451,7 @@ function contactForm() {
 
 
         send.disabled = true;
-        send.textContent = 'Enviando…';
+        send.textContent = I18N.t('form.sending');
         steps.forEach((_, i) => setStep(i));
 
         const request = CONTACT_WEBHOOK
@@ -436,18 +486,18 @@ function contactForm() {
         if (failed) {
             const i = steps.findIndex(s => s.classList.contains('is-active'));
             if (i > -1) setStep(i, 'is-fail');
-            error.innerHTML = 'No se pudo enviar. Escríbeme a <a href="mailto:guerracristofer@gmail.com">mi correo</a> o por <a href="https://wa.me/50246842943" target="_blank" rel="noopener">WhatsApp</a>.';
+            error.innerHTML = I18N.t('form.error');
             send.disabled = false;
-            send.textContent = 'Intentar de nuevo';
+            send.textContent = I18N.t('form.retry');
             return;
         }
 
         setStep(steps.length - 1, 'is-done');
         window.trackEvent?.('envio_formulario', { tipo: data.tipo });
         if (!CONTACT_WEBHOOK) steps[steps.length - 1].insertAdjacentText('beforeend', ' (demo local)');
-        send.textContent = 'Mensaje enviado';
+        send.textContent = I18N.t('form.sent');
         error.classList.add('is-ok');
-        error.textContent = '¡Gracias! Recibí tu mensaje y te respondo pronto a tu correo.';
+        error.textContent = I18N.t('form.thanks');
         form.querySelectorAll('input, select, textarea').forEach(el => { el.disabled = true; });
     });
 }
@@ -457,7 +507,8 @@ function themeToggle() {
     const btn = document.querySelector('.theme');
     const root = document.documentElement;
     const meta = document.querySelector('meta[name="theme-color"]');
-    const label = () => btn.setAttribute('aria-label', root.dataset.theme === 'dark' ? 'Cambiar a modo claro' : 'Cambiar a modo oscuro');
+    const label = () => btn.setAttribute('aria-label', I18N.t(root.dataset.theme === 'dark' ? 'theme.toLight' : 'theme.toDark'));
+    document.addEventListener('langchange', label);
     label();
 
     function apply(t) {
@@ -494,6 +545,45 @@ function themeToggle() {
         let saved = null;
         try { saved = localStorage.getItem('tema'); } catch (err) { }
         if (!saved) apply(e.matches ? 'dark' : 'light');
+    });
+}
+
+/* ---------- idioma español / inglés ---------- */
+function langToggle() {
+    const btn = document.querySelector('.lang');
+    const wipe = document.querySelector('.wipe');
+    const label = () => btn.setAttribute('aria-label', I18N.t('lang.switch'));
+    label();
+
+    function swap(next) {
+        const y = lenis ? lenis.scroll : window.scrollY;
+        if (scrollCtx) teardownScroll();
+        I18N.apply(next);
+        label();
+        document.dispatchEvent(new Event('langchange'));
+        if (!reduced) {
+            setupScroll();
+            ScrollTrigger.refresh();
+            if (lenis) lenis.scrollTo(y, { immediate: true, force: true });
+            else window.scrollTo(0, y);
+        }
+    }
+
+    btn.addEventListener('click', () => {
+        const next = I18N.lang === 'es' ? 'en' : 'es';
+        try { localStorage.setItem('idioma', next); } catch (e) { }
+        if (reduced) { swap(next); return; }
+
+        // una cortina cubre la página mientras se rehacen textos y animaciones
+        wipe.querySelector('.wipe__text').textContent = `Accept-Language: ${next === 'en' ? 'en-US' : 'es-GT'}`;
+        gsap.timeline()
+            .set(wipe, { display: 'grid' })
+            .fromTo(wipe, { clipPath: 'inset(100% 0% 0% 0%)' }, { clipPath: 'inset(0% 0% 0% 0%)', duration: 0.55, ease: 'power4.inOut' })
+            .from(wipe.firstElementChild, { duration: 0.5, scrambleText: { text: '', chars: '01', speed: 0.6 } }, 0.2)
+            .add(() => swap(next))
+            .to(wipe, { clipPath: 'inset(0% 0% 100% 0%)', duration: 0.6, ease: 'power4.inOut' }, '+=0.2')
+            .set(wipe, { display: 'none' });
+        gsap.fromTo(btn.children, { yPercent: -60, autoAlpha: 0 }, { yPercent: 0, autoAlpha: 1, duration: 0.5, stagger: 0.06, ease: 'back.out(2)' });
     });
 }
 
